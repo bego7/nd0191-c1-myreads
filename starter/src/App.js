@@ -1,8 +1,8 @@
 import "./App.css";
 import { useState } from "react";
-import ListBooks from "./ListBooks";
 import Shelf from "./Shelf";
 import {Route, Routes, useNavigate} from "react-router-dom";
+import SearchBooks from "./SearchBooks";
 
 const App = () => {
   return (
@@ -10,7 +10,7 @@ const App = () => {
       <Route  
         exact path="/" element={ <Shelf /> } />
       <Route  
-        exact path="list" element={ <ListBooks /> } />
+        exact path="search" element={ <SearchBooks /> } />
     </Routes>
   )
 };
