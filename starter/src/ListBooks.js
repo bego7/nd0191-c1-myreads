@@ -7,6 +7,7 @@ const ListBooks = ({ books }) => {
             {
                 books.map((book) => (
                     <li key={book.id}>
+                        
                         <div className="book">
                             <div className="book-top">
                                 <div
@@ -14,8 +15,8 @@ const ListBooks = ({ books }) => {
                                     style={{
                                         width: 128,
                                         height: 193,
-                                        backgroundImage:
-                                            book.imageLinks.thumbnail,
+                                        backgroundImage:`url("${book.imageLinks.smallThumbnail}")`
+                                            ,
                                     }}
                                 ></div>
                                 <div className="book-shelf-changer">
