@@ -3,22 +3,36 @@ import * as BooksAPI from "./BooksAPI";
 import {Link} from "react-router-dom";
 import ListBooks from "./ListBooks";
 
+const SearchBooks = ()=> {
 
+        const [query, setQuery] = useState('');
+        const [books, setBooks] = useState([]);
+        const [availability, setAvailability] = useState(false);
 
-const SearchBooks = ()=>{
+        const updateQuery = ((query)=>{
+            setQuery(query)
+            searchBook(query);
+        })
 
-    const [books, setBooks] = useState([]);
-
-    useEffect(()=>{
-        const getBooks = async ()=>{
-          const res = await BooksAPI.getAll();
-          console.log(res);
-          setBooks(res);
+        const searchBook = (query)=>{
+            const search = async ()=> {
+                const res = await BooksAPI.search(query,20);
+                console.log("Tha value of res is ",res);
+                if(!res || res.error){
+                    console.log("NO BOOKS WITH THAT NAME");
+                    setAvailability(false);
+                    setBooks([]);
+                }
+                    
+                else{
+                    setBooks(res);
+                    setAvailability(true);
+                }
+            }
+            
+            search();
+            
         }
-    
-        getBooks();
-    
-    }, []);
 
     return (
         <div>
@@ -29,6 +43,7 @@ const SearchBooks = ()=>{
                         <input
                         type="text"
                         placeholder="Search by title, author, or ISBN"
+                        value ={query} onChange={(event)=>updateQuery(event.target.value)}
                         />
                     </div>
                     </div>
@@ -36,7 +51,10 @@ const SearchBooks = ()=>{
                     <ol className="books-grid"></ol>
                 </div>
             </div>
-            <ListBooks books ={books}/>
+            {
+                availability ? <ListBooks books = {books} /> : <span>No books available</span>
+            }
+            
         </div>
         
     )
