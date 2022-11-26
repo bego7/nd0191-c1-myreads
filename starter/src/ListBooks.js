@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
-const ListBooks = ({ books }) => {
-
+const ListBooks = ({ books, shelf }) => {
+    const [status, setStatus] = useState('none');
+    const changeStatus = (id) => {
+        console.log(id);
+    }
     return (
         <ol className="books-grid">
             {
@@ -18,7 +21,7 @@ const ListBooks = ({ books }) => {
                                             }}
                                         ></div>
                                         <div className="book-shelf-changer">
-                                            <select>
+                                            <select onChange={changeStatus(book.id)} value = {book.shelf}>
                                                 <option value="none" disabled>
                                                     Move to...
                                                 </option>
