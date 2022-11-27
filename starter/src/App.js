@@ -33,7 +33,7 @@ const App = () => {
           moveBook(book,status)}} books = {books} /> } />
       <Route  
         exact path="search" element={ <SearchBooks onMoveBook = {(book, status)=>{
-          moveBook(book,status)}} /> } />
+          moveBook(book,status)}} shelfBooks={books} /> } />
     </Routes>
   )
 };

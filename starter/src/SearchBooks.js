@@ -3,21 +3,25 @@ import * as BooksAPI from "./BooksAPI";
 import {Link} from "react-router-dom";
 import ListBooks from "./ListBooks";
 
-const SearchBooks = ({onMoveBook})=> {
-        const [shelfBooks, setShelfBooks] = useState([]);
-        useEffect(()=>{
+const SearchBooks = ({onMoveBook, shelfBooks})=> {
+
+        
             const getBooks = async ()=>{
+
             const res = await BooksAPI.getAll();
-            console.log("The books in the shelf are ",res);
-            setShelfBooks(res);
+            
             }
             
-            getBooks();
+            
+            
+
+            
         
-        }, []);
+        
 
         const [query, setQuery] = useState('');
         const [books, setBooks] = useState([]);
+        //const [shelfBooks, setShelfBooks] = useState([]);
         const [availability, setAvailability] = useState(false);
 
         const updateQuery = ((query)=>{
@@ -36,11 +40,48 @@ const SearchBooks = ({onMoveBook})=> {
                 }
                     
                 else{
+                    
                     // res.map((book)=>{
                     //     book.id === 
                     // })
-                    setBooks(res);
+
+                    
+                    //getBooks();
+                    
+                    console.log(shelfBooks);
+                        const newArray =[];
+                        for(let i = 0; i < res.length;i++){
+                            for(let j = 0; j < shelfBooks.length;j++){
+                            
+                                if(res[i].id === shelfBooks[j].id){
+                                    newArray[i] = shelfBooks[j];
+                                    console.log("The shelf value is",shelfBooks[j]);
+                                    break;
+                                    //onMoveBook(res[i], shelfBooks[j].shelf);
+                                }
+                                else{
+                                    console.log("Entro al else");
+                                    //newArray[i] ='o';
+                                    newArray[i] = res[i];
+                                }
+                            }
+                         }
+                        //console.log("The books after changing are", res);
+                    //  const newRes = res.map((book=>(
+                            
+                    //  )))
+                    
+                    
+
+                    // const newValues = res.map((book)=>
+                    //                 shelfBooks.filter((shelfBook)=>
+                    //                     book.id === shelfBook.id ? shelfBook : book
+                    //                 ))
+                    console.log("Ne valies ", newArray);
+                    setBooks(newArray);
+                    getBooks();
                     setAvailability(true);
+                    
                 }
             }
             
@@ -66,7 +107,7 @@ const SearchBooks = ({onMoveBook})=> {
                 </div>
             </div>
             {
-                availability ? <ListBooks books = {books} onMoveBook ={onMoveBook}/> : <span>No books available</span>
+                availability ? <ListBooks books = {books} onMoveBook = {onMoveBook}/> : <span>No books available</span>
             }
             
         </div>
