@@ -21,8 +21,8 @@ const ListBooks = ({ books, shelf }) => {
                                             }}
                                         ></div>
                                         <div className="book-shelf-changer">
-                                            <select onChange={changeStatus(book.id)} value = {book.shelf}>
-                                                <option value="none" disabled>
+                                            <select  defaultValue = {book.shelf ? book.shelf : "none"}>
+                                                <option disabled>
                                                     Move to...
                                                 </option>
                                                 <option value="currentlyReading">
