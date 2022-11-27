@@ -3,7 +3,18 @@ import * as BooksAPI from "./BooksAPI";
 import {Link} from "react-router-dom";
 import ListBooks from "./ListBooks";
 
-const SearchBooks = ()=> {
+const SearchBooks = ({onMoveBook})=> {
+        const [shelfBooks, setShelfBooks] = useState([]);
+        useEffect(()=>{
+            const getBooks = async ()=>{
+            const res = await BooksAPI.getAll();
+            console.log("The books in the shelf are ",res);
+            setShelfBooks(res);
+            }
+            
+            getBooks();
+        
+        }, []);
 
         const [query, setQuery] = useState('');
         const [books, setBooks] = useState([]);
@@ -25,6 +36,9 @@ const SearchBooks = ()=> {
                 }
                     
                 else{
+                    // res.map((book)=>{
+                    //     book.id === 
+                    // })
                     setBooks(res);
                     setAvailability(true);
                 }
@@ -52,7 +66,7 @@ const SearchBooks = ()=> {
                 </div>
             </div>
             {
-                availability ? <ListBooks books = {books} /> : <span>No books available</span>
+                availability ? <ListBooks books = {books} onMoveBook ={onMoveBook}/> : <span>No books available</span>
             }
             
         </div>

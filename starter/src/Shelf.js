@@ -1,22 +1,13 @@
 import { useState, useEffect } from "react";
 import {Link} from "react-router-dom";
-import * as BooksAPI from "./BooksAPI";
 import BookShelf from "./BookShelf";
 
-const Shelf = () =>{
+const Shelf = ({books, onMoveBook}) =>{
 
-    const [books, setBooks] = useState([]);
+    // const [books, setBooks] = useState([]);
 
-    useEffect(()=>{
-        const getBooks = async ()=>{
-          const res = await BooksAPI.getAll();
-          console.log(res);
-          setBooks(res);
-        }
     
-        getBooks();
     
-    }, []);
 
 
 
@@ -27,11 +18,11 @@ const Shelf = () =>{
     </div>
     <div className="list-books-content">
       <div>
-        <BookShelf title={"Currently Reading"} books={books.filter((book)=>book.shelf==="currentlyReading")} shelf ={"currentlyReading"} />
+        <BookShelf title={"Currently Reading"} books={books.filter((book)=>book.shelf==="currentlyReading")} shelf ={"currentlyReading"} onMoveBook={onMoveBook} />
 
-        <BookShelf title={"Want to Read"} books={books.filter((book)=>book.shelf==="wantToRead")}  shelf={"wantToRead"} />
-        
-        <BookShelf title={"Read"} books={books.filter((book)=>book.shelf==="read")}  shelf={"read"}/>
+        <BookShelf title={"Want to Read"} books={books.filter((book)=>book.shelf==="wantToRead")}  shelf={"wantToRead"} onMoveBook={onMoveBook}/>
+
+        <BookShelf title={"Read"} books={books.filter((book)=>book.shelf==="read")}  shelf={"read"} onMoveBook={onMoveBook}/>
       </div>
     </div>
     <div className="open-search">

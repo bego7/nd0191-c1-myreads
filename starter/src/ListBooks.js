@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react";
 import * as BooksAPI from "./BooksAPI";
-const ListBooks = ({ books, shelf }) => {
+const ListBooks = ({ books, shelf, onMoveBook={onMoveBook} }) => {
     const [status, setStatus] = useState('none');
-    const changeStatus = (status,id) => {
-        console.log("The status is ", status ,"the id is ",id);
-        
-        const update = async ()=> {
-            const res = await BooksAPI.update(id, status);
-            console.log(res);
+    const changeStatus = (status,id) => {        
+        // const update = async ()=> {
+        //     const res = await BooksAPI.update(id, status);
 
-        }
-        update();
+        // }
+        // update();
+        // const get = async ()=>{
+        //     const res = await BooksAPI.getAll();
+        //     console.log(res);
+        // }
+        // get();
 
+        onMoveBook(id, status);
     }
 
 

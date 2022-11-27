@@ -1,11 +1,11 @@
 import ListBooks from "./ListBooks";
-const BookShelf = ({title,books, shelf})=>{
+const BookShelf = ({title,books, shelf, onMoveBook})=>{
 
     return(
         <div className="bookshelf">
           <h2 className="bookshelf-title">{title}</h2>
           <div className="bookshelf-books">
-          <ListBooks books = {books} shelf = {shelf}/>
+          <ListBooks books = {books} shelf = {shelf} onMoveBook={onMoveBook}/>
           </div>
         </div>
     )
