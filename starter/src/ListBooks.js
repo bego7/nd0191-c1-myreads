@@ -1,23 +1,8 @@
-import { useState, useEffect } from "react";
-import * as BooksAPI from "./BooksAPI";
-const ListBooks = ({ books, shelf, onMoveBook={onMoveBook} }) => {
-    const [status, setStatus] = useState('none');
+const ListBooks = ({ books,onMoveBook}) => {
+
     const changeStatus = (status,id) => {        
-        // const update = async ()=> {
-        //     const res = await BooksAPI.update(id, status);
-
-        // }
-        // update();
-        // const get = async ()=>{
-        //     const res = await BooksAPI.getAll();
-        //     console.log(res);
-        // }
-        // get();
-
         onMoveBook(id, status);
     }
-
-
     return (
         <ol className="books-grid">
             {

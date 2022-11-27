@@ -1,7 +1,7 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import Shelf from "./Shelf";
-import {Route, Routes, useNavigate} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import SearchBooks from "./SearchBooks";
 import * as BooksAPI from "./BooksAPI";
 
@@ -12,7 +12,6 @@ const App = () => {
   useEffect(()=>{
         const getBooks = async ()=>{
           const res = await BooksAPI.getAll();
-          console.log(res);
           setBooks(res);
         }
     
@@ -23,9 +22,9 @@ const App = () => {
   const moveBook = async (book, status)=> {
     await BooksAPI.update(book, status);
     const res = await BooksAPI.getAll();
-    console.log(res);
     setBooks(res);
   }
+  
   return (
     <Routes>
       <Route  
