@@ -1,9 +1,20 @@
 import { useState, useEffect } from "react";
+import * as BooksAPI from "./BooksAPI";
 const ListBooks = ({ books, shelf }) => {
     const [status, setStatus] = useState('none');
-    const changeStatus = (id) => {
-        console.log(id);
+    const changeStatus = (status,id) => {
+        console.log("The status is ", status ,"the id is ",id);
+        
+        const update = async ()=> {
+            const res = await BooksAPI.update(id, status);
+            console.log(res);
+
+        }
+        update();
+
     }
+
+
     return (
         <ol className="books-grid">
             {
@@ -21,7 +32,7 @@ const ListBooks = ({ books, shelf }) => {
                                             }}
                                         ></div>
                                         <div className="book-shelf-changer">
-                                            <select  defaultValue = {book.shelf ? book.shelf : "none"}>
+                                            <select  defaultValue = {book.shelf ? book.shelf : "none"} onChange={(e)=>changeStatus(e.target.value, book)}>
                                                 <option disabled>
                                                     Move to...
                                                 </option>
